@@ -7,11 +7,15 @@ import { WikipediaService } from './wikipedia.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  pages=[];
+
   constructor(private wikiService: WikipediaService) {}
 
   ngOnInit(): void {}
   onTerm(term: string) {
-    const results = this.wikiService.search(term);
-    console.log(results);
+   this.wikiService.search(term).subscribe((res:any)=>{
+     console.log(res)
+     this.pages=res?.query.search
+   })
   }
 }
